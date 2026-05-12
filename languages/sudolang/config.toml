@@ -1,6 +1,6 @@
 name = "SudoLang"
 grammar = "sudolang"
-path_suffixes = ["sudo", "sudo.md", "mdc"]
+path_suffixes = ["sudo"]
 line_comments = ["// "]
 block_comment = ["/* ", " */"]
 autoclose_before = ";:.,=}])>"

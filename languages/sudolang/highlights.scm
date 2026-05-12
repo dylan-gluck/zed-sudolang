@@ -30,8 +30,6 @@
   "xor"
   "union"
   "intersection"
-  "cap"
-  "cup"
 ] @keyword.operator
 
 ; --- Literals --------------------------------------------------------
@@ -64,7 +62,6 @@
 
 (member_expression property: (identifier) @property)
 (property_declaration name: (identifier) @property)
-(property_declaration name: (multiword_property) @property)
 (object_property_named key: (identifier) @property)
 
 (modifier name: (identifier) @attribute)
@@ -74,16 +71,9 @@
 (command_name) @function.special
 (command_description) @comment.doc
 
-; --- Constraints, requires, warns -----------------------------------
-
-(constraint_inline body: (constraint_body) @comment.doc)
-(require_statement body: (require_body) @comment.doc)
-(warn_statement body: (warn_body) @comment.doc)
-
 ; --- Interface and constraint names ---------------------------------
 
 (interface_declaration name: (identifier) @type.definition)
-(interface_declaration name: (multiword_name) @type.definition)
 (constraint_block name: (identifier) @type)
 
 ; --- Operators -------------------------------------------------------
@@ -134,18 +124,7 @@
 (line_comment) @comment
 (block_comment) @comment
 
-; --- Natural language ------------------------------------------------
+; --- Section headings ------------------------------------------------
 
-(prose_line) @comment.doc
-(prose) @comment.doc
-
-; --- Markdown --------------------------------------------------------
-
-(markdown_heading) @markup.heading
+(section_heading) @markup.heading
 (heading_marker) @punctuation.special
-(list_marker) @punctuation.special
-(blockquote_marker) @punctuation.special
-(blockquote_text) @markup.quote
-(fence_open) @punctuation.special
-(fence_close) @punctuation.special
-(fence_language) @label

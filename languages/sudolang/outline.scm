@@ -1,9 +1,9 @@
 ;; SudoLang outline — interfaces, functions, constraints, commands,
-;; markdown headings.
+;; section headings.
 
 (interface_declaration
   "interface"? @context
-  name: (_) @name) @item
+  name: (identifier) @name) @item
 
 (function_declaration
   ["fn" "function"]? @context
@@ -16,6 +16,6 @@
 (command_declaration
   command: (command_name) @name) @item
 
-(markdown_heading
+(section_heading
   marker: (heading_marker) @context
   text: (heading_text) @name) @item

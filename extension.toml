@@ -1,7 +1,7 @@
 id = "sudolang"
 name = "SudoLang"
 description = "SudoLang language support (syntax highlighting, outline, brackets, code injections)"
-version = "0.1.0"
+version = "0.1.1"
 schema_version = 1
 authors = ["Dylan Navajas Gluck"]
 repository = "https://github.com/dylan-gluck/zed-sudolang"
@@ -14,7 +14,7 @@ capabilities = []
 
 [grammars.sudolang]
 repository = "https://github.com/dylan-gluck/tree-sitter-sudolang"
-rev = "c1d0a0fa198d361e207266f9c114469a49301820"
+rev = "241a4fb48fc2f6bf043e24fd9d0c390a8d65dbee"
 
 [language_servers]
 

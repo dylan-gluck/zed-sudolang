@@ -1,47 +1,40 @@
 # zed-sudolang
 
-A [Zed](https://zed.dev) extension that adds SudoLang language support: syntax highlighting, outline navigation, bracket matching, indentation, and code injections for fenced blocks.
+A [Zed](https://zed.dev) extension that adds [SudoLang](https://github.com/paralleldrive/sudolang-llm-support) language support: syntax highlighting, outline navigation, bracket matching, indentation, and code injections.
 
 - Source: <https://github.com/dylan-gluck/zed-sudolang>
 - Grammar: <https://github.com/dylan-gluck/tree-sitter-sudolang>
 
 ## File types
 
-Registers for `.sudo`, `.sudo.md`, and `.mdc` files.
+Registers `.sudo` files as SudoLang. Markdown files (`.md`, `.sudo.md`, `.mdc`) are still handled by Zed's built-in Markdown extension; SudoLang code fences inside them (` ```sudo ` / ` ```SudoLang `) are highlighted via Markdown's code-block injection once this extension is installed.
 
 ## Install
 
-Once published: install from the Zed extensions panel (`cmd-shift-X`).
+### From the Zed extension picker
 
-### Dev install
+1. Open the command palette (`cmd-shift-P`).
+2. Run **`zed: extensions`**.
+3. Search for **SudoLang** and click **Install**.
 
-In Zed, run **`zed: install dev extension`** (command palette: `cmd-shift-P`) and select this directory. Zed will fetch the grammar repo pinned in `extension.toml` and build the WASM during install.
+That's it — open any `.sudo` file to see highlighting, outline, and bracket matching.
 
-For pre-publish testing where the grammar repo isn't on GitHub yet, you can pre-build and stage the extension manually:
+### Dev install (for contributors)
 
-```bash
-# Build the grammar
-cd ../tree-sitter-sudolang
-npx tree-sitter generate
-npx tree-sitter build --wasm
+To work against a local checkout of this repo:
 
-# Stage into Zed's installed-extensions directory
-EXT_DIR="$HOME/Library/Application Support/Zed/extensions/installed/sudolang"
-mkdir -p "$EXT_DIR/grammars" "$EXT_DIR/languages/sudolang"
-cp tree-sitter-sudolang.wasm "$EXT_DIR/grammars/sudolang.wasm"
-cp ../zed-sudolang/extension.toml "$EXT_DIR/extension.toml"
-cp -r ../zed-sudolang/languages/sudolang/* "$EXT_DIR/languages/sudolang/"
-```
+1. Clone this repository.
+2. In Zed, open the command palette and run **`zed: install dev extension`**.
+3. Select the cloned directory.
 
-Restart Zed and open any `.sudo.md` file.
+Zed builds the parser from the SHA pinned in `extension.toml` and installs the extension. Edits to local query files take effect after a restart.
 
 ## Features
 
-- Syntax highlighting for interfaces, functions, constraints, commands, pipes, modifiers, strings, and Markdown.
-- Outline panel populated with interfaces, functions, constraints, commands, and Markdown headings.
+- Syntax highlighting for interfaces, functions, constraints, commands, pipes, modifiers, strings, and section headings.
+- Outline panel populated with interfaces, functions, constraints, commands, and `# heading` markers.
 - Bracket pair matching for `{}`, `[]`, `()`, `""`, and `` `` ``.
 - Indent-on-newline after `{` and `[`.
-- Code injections into fenced code blocks (e.g. `mermaid`, `javascript`, `python`, `json`, and `sudolang` self-injection).
 - Vim-mode text objects for function / class / parameter / comment scopes.
 
 ## License
