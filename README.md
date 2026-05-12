@@ -1,9 +1,10 @@
 # zed-sudolang
 
-A [Zed](https://zed.dev) extension that adds [SudoLang](https://github.com/paralleldrive/sudolang-llm-support) language support: syntax highlighting, outline navigation, bracket matching, indentation, and code injections.
+A [Zed](https://zed.dev) extension that adds [SudoLang](https://github.com/paralleldrive/sudolang-llm-support) language support: syntax highlighting, outline navigation, bracket matching, indentation, code injections, and — when [`sudolang-lsp`](https://github.com/dylan-gluck/sudolang-lsp) is on `$PATH` — diagnostics and format-on-save.
 
 - Source: <https://github.com/dylan-gluck/zed-sudolang>
 - Grammar: <https://github.com/dylan-gluck/tree-sitter-sudolang>
+- Language server: <https://github.com/dylan-gluck/sudolang-lsp>
 
 ## File types
 
@@ -36,6 +37,45 @@ Zed builds the parser from the SHA pinned in `extension.toml` and installs the e
 - Bracket pair matching for `{}`, `[]`, `()`, `""`, and `` `` ``.
 - Indent-on-newline after `{` and `[`.
 - Vim-mode text objects for function / class / parameter / comment scopes.
+- **Diagnostics and formatting via `sudolang-lsp`** (opt-in — see below).
+
+## Language server
+
+The extension registers a language server named **SudoLang LSP** and
+launches it on demand. It does not bundle a binary; install
+[`sudolang-lsp`](https://github.com/dylan-gluck/sudolang-lsp) yourself
+and ensure it's on `$PATH`:
+
+```sh
+git clone https://github.com/dylan-gluck/sudolang-lsp
+cd sudolang-lsp
+cargo install --path .
+```
+
+Once installed, Zed picks it up automatically when you open a `.sudo`
+file. Enable format-on-save in your Zed settings to use the formatter:
+
+```json
+{
+  "languages": {
+    "SudoLang": {
+      "format_on_save": "on"
+    }
+  }
+}
+```
+
+The server provides:
+
+- **Diagnostics** — unbalanced braces, missing tokens, malformed
+  modifier lists (`:foo=bar;`), broken `${}` interpolations.
+- **Formatting** — deterministic, AST-driven re-indent. Never reorders
+  tokens or rewrites content; never touches the inside of multi-line
+  strings or comments.
+
+If `sudolang-lsp` isn't on `$PATH` the extension fails the language-server
+launch with an actionable error pointing here. The rest of the extension
+(highlighting, outline, brackets) keeps working.
 
 ## License
 

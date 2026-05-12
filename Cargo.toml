@@ -1,0 +1,16 @@
+[package]
+name = "zed-sudolang"
+version = "0.1.2"
+edition = "2021"
+license = "MIT"
+publish = false
+authors = ["Dylan Navajas Gluck"]
+repository = "https://github.com/dylan-gluck/zed-sudolang"
+description = "SudoLang extension for the Zed editor"
+
+[lib]
+path = "src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+zed_extension_api = "0.6.0"
