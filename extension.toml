@@ -1,7 +1,7 @@
 id = "sudolang"
 name = "SudoLang"
 description = "SudoLang language support: syntax highlighting, outline, brackets, code injections, and the sudolang-lsp language server (diagnostics + formatting)."
-version = "0.1.2"
+version = "0.1.3"
 schema_version = 1
 authors = ["Dylan Navajas Gluck"]
 repository = "https://github.com/dylan-gluck/zed-sudolang"

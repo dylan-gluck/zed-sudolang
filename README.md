@@ -37,7 +37,8 @@ Zed builds the parser from the SHA pinned in `extension.toml` and installs the e
 - Bracket pair matching for `{}`, `[]`, `()`, `""`, and `` `` ``.
 - Indent-on-newline after `{` and `[`.
 - Vim-mode text objects for function / class / parameter / comment scopes.
-- **Diagnostics and formatting via `sudolang-lsp`** (opt-in — see below).
+- **Diagnostics, formatting, hover, completion, and goto-definition via
+  `sudolang-lsp`** (opt-in — see below).
 
 ## Language server
 
@@ -72,6 +73,13 @@ The server provides:
 - **Formatting** — deterministic, AST-driven re-indent. Never reorders
   tokens or rewrites content; never touches the inside of multi-line
   strings or comments.
+- **Hover** — Markdown blurbs for keywords, in-document identifiers
+  (function / interface / property / variable / parameter / constraint),
+  and `/command` invocations.
+- **Completion** — keyword list plus every named declaration in the
+  current document. Trigger characters: `.`, `/`, `$`.
+- **Go to definition** — jumps from an identifier or `/command`
+  invocation to its declaration in the same file.
 
 If `sudolang-lsp` isn't on `$PATH` the extension fails the language-server
 launch with an actionable error pointing here. The rest of the extension
