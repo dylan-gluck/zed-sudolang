@@ -8,7 +8,9 @@ A [Zed](https://zed.dev) extension that adds [SudoLang](https://github.com/paral
 
 ## File types
 
-Registers `.sudo` files as SudoLang. Markdown files (`.md`, `.sudo.md`, `.mdc`) are still handled by Zed's built-in Markdown extension; SudoLang code fences inside them (` ```sudo ` / ` ```SudoLang `) are highlighted via Markdown's code-block injection once this extension is installed.
+The preferred SudoLang authoring format is **markdown with `sudo` code fences** — plain `.md`, or `.sudo.md` to signal SudoLang content. Markdown files are handled by Zed's built-in Markdown support; once this extension is installed, ` ```sudo ` / ` ```SudoLang ` fences highlight via code-block injection, and `sudolang-lsp` attaches to markdown buffers to diagnose, format, and navigate the fences in place (prose is never touched).
+
+Pure `.sudo` files register as SudoLang and are parsed whole.
 
 ## Install
 
@@ -32,7 +34,8 @@ Zed builds the parser from the SHA pinned in `extension.toml` and installs the e
 
 ## Features
 
-- Syntax highlighting for interfaces, functions, constraints, commands, pipes, modifiers, strings, and section headings.
+- SudoLang **v2.2**: qualified capability names (`mcp::linear`), named arguments, guard statements (`->`), decorators (`@retry(3)`), optional chaining `?.`, nullish default `??`, spread `...`, and the pipe placeholder `_`.
+- Syntax highlighting for interfaces, functions, constraints, commands, pipes, modifiers, strings, and section headings — plus capability namespaces and decorators.
 - Outline panel populated with interfaces, functions, constraints, commands, and `# heading` markers.
 - Bracket pair matching for `{}`, `[]`, `()`, `""`, and `` `` ``.
 - Indent-on-newline after `{` and `[`.
@@ -48,13 +51,15 @@ launches it on demand. It does not bundle a binary; install
 and ensure it's on `$PATH`:
 
 ```sh
-git clone https://github.com/dylan-gluck/sudolang-lsp
-cd sudolang-lsp
-cargo install --path .
+cargo install sudolang-lsp
 ```
 
+(or download a prebuilt binary from the
+[sudolang-lsp releases](https://github.com/dylan-gluck/sudolang-lsp/releases)
+and put it on `$PATH`).
+
 Once installed, Zed picks it up automatically when you open a `.sudo`
-file. Enable format-on-save in your Zed settings to use the formatter:
+file or a markdown file with `sudo` fences. Enable format-on-save in your Zed settings to use the formatter:
 
 ```json
 {

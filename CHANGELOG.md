@@ -5,6 +5,30 @@ All notable changes to the Zed SudoLang extension are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-07-23
+
+SudoLang **v2.2**. Version aligned with tree-sitter-sudolang and
+sudolang-lsp for the coordinated release.
+
+### Added
+
+- Grammar pinned to tree-sitter-sudolang 0.3.0 (v2.2 dialect):
+  qualified capability names, named arguments, guard statements,
+  decorators, optional chaining, nullish default, spread/rest,
+  pipe placeholder.
+- Highlighting for capability namespaces (`@variable.special`, matching
+  sigils), decorators (`@attribute`), and the new operators
+  (`->`, `??`, `?.`, `...`, `::`).
+- `sudolang-lsp` now attaches to **Markdown** buffers as well — the
+  preferred authoring format is `.md` (or `.sudo.md`) with `sudo` code
+  fences, which the server diagnoses, formats, and navigates in place.
+
+### Changed
+
+- LSP not-found message points at `cargo install sudolang-lsp` and the
+  prebuilt release binaries.
+- `Cargo.lock` is committed (Zed extension registry requirement).
+
 ## [0.1.3] - 2026-05-12
 
 ### Added

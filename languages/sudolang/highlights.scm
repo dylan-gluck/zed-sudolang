@@ -53,6 +53,18 @@
 
 (sigil_identifier) @variable.special
 
+; --- Qualified capability names (2.2) --------------------------------
+; Environment-resolved, like sigils — same @variable.special family.
+
+(qualified_identifier namespace: (identifier) @variable.special)
+(qualified_identifier name: (identifier) @variable.special)
+(call_expression
+  function: (qualified_identifier name: (identifier) @function .))
+
+; --- Decorators (2.2) ------------------------------------------------
+
+(decorator name: (decorator_name) @attribute)
+
 (function_declaration name: (identifier) @function.definition)
 (call_expression function: (identifier) @function)
 (call_expression function: (member_expression property: (identifier) @function.method))
@@ -81,6 +93,11 @@
 [
   "|>"
   "=>"
+  "->"
+  "??"
+  "?."
+  "..."
+  "::"
   "&&"
   "||"
   "=="

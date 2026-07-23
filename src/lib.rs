@@ -19,8 +19,9 @@ impl zed::Extension for SudoLangExtension {
         let path = worktree.which(SERVER_BINARY).ok_or_else(|| {
             format!(
                 "`{SERVER_BINARY}` was not found on $PATH. Install it with \
-                 `cargo install --git https://github.com/dylan-gluck/sudolang-lsp` \
-                 (or build from source) and reload the window."
+                 `cargo install sudolang-lsp` (or grab a prebuilt binary from \
+                 https://github.com/dylan-gluck/sudolang-lsp/releases) and \
+                 reload the window."
             )
         })?;
 
