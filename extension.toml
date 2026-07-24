@@ -15,7 +15,7 @@ kind = "Rust"
 
 [grammars.sudolang]
 repository = "https://github.com/dylan-gluck/tree-sitter-sudolang"
-rev = "8644688ee4156a5379688d941348af504bfcda0e"
+rev = "b8fff34244645840874e921c5a4d5a35e5abe7ea"
 
 [language_servers.sudolang-lsp]
 name = "SudoLang LSP"
