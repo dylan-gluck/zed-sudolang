@@ -1,6 +1,6 @@
 # zed-sudolang
 
-A [Zed](https://zed.dev) extension that adds [SudoLang](https://github.com/paralleldrive/sudolang-llm-support) language support: syntax highlighting, outline navigation, bracket matching, indentation, code injections, and — when [`sudolang-lsp`](https://github.com/dylan-gluck/sudolang-lsp) is on `$PATH` — diagnostics and format-on-save.
+A [Zed](https://zed.dev) extension that adds SudoLang language support: syntax highlighting, outline navigation, bracket matching, indentation, code injections, and — when [`sudolang-lsp`](https://github.com/dylan-gluck/sudolang-lsp) is on `$PATH` — diagnostics and format-on-save.
 
 - Source: <https://github.com/dylan-gluck/zed-sudolang>
 - Grammar: <https://github.com/dylan-gluck/tree-sitter-sudolang>
