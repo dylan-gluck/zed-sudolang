@@ -74,15 +74,17 @@ file or a markdown file with `sudo` fences. Enable format-on-save in your Zed se
 The server provides:
 
 - **Diagnostics** — unbalanced braces, missing tokens, malformed
-  modifier lists (`:foo=bar;`), broken `${}` interpolations.
+  modifier lists (`:foo=bar;`), broken `${}` interpolations, and a
+  pipe-placeholder (`_`) misuse lint.
 - **Formatting** — deterministic, AST-driven re-indent. Never reorders
   tokens or rewrites content; never touches the inside of multi-line
   strings or comments.
-- **Hover** — Markdown blurbs for keywords, in-document identifiers
-  (function / interface / property / variable / parameter / constraint),
-  and `/command` invocations.
-- **Completion** — keyword list plus every named declaration in the
-  current document. Trigger characters: `.`, `/`, `$`.
+- **Hover** — Markdown blurbs for keywords, decorators, capability
+  namespaces, in-document identifiers (function / interface / property /
+  variable / parameter / constraint), and `/command` invocations.
+- **Completion** — keywords, every named declaration in the current
+  document, and capability namespaces (`mcp::linear`). Trigger
+  characters: `.`, `/`, `$`, `:`, `@`.
 - **Go to definition** — jumps from an identifier or `/command`
   invocation to its declaration in the same file.
 
