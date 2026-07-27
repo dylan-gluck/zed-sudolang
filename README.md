@@ -1,6 +1,6 @@
 # zed-sudolang
 
-A [Zed](https://zed.dev) extension that adds SudoLang language support: syntax highlighting, outline navigation, bracket matching, indentation, code injections, and — when [`sudolang-lsp`](https://github.com/dylan-gluck/sudolang-lsp) is on `$PATH` — diagnostics and format-on-save.
+A [Zed](https://zed.dev) extension that adds SudoLang language support: syntax highlighting, outline navigation, bracket matching, indentation, and code injections. When [`sudolang-lsp`](https://github.com/dylan-gluck/sudolang-lsp) is on `$PATH`, the extension also gives you diagnostics and format-on-save.
 
 - Source: <https://github.com/dylan-gluck/zed-sudolang>
 - Grammar: <https://github.com/dylan-gluck/tree-sitter-sudolang>
@@ -8,9 +8,11 @@ A [Zed](https://zed.dev) extension that adds SudoLang language support: syntax h
 
 ## File types
 
-The preferred SudoLang authoring format is **markdown with `sudo` code fences** — plain `.md`, or `.sudo.md` to signal SudoLang content. Markdown files are handled by Zed's built-in Markdown support; once this extension is installed, ` ```sudo ` / ` ```SudoLang ` fences highlight via code-block injection, and `sudolang-lsp` attaches to markdown buffers to diagnose, format, and navigate the fences in place (prose is never touched).
+Write SudoLang in markdown with `sudo` code fences. Use a plain `.md` file, or use `.sudo.md` to mark the file as SudoLang content.
 
-Pure `.sudo` files register as SudoLang and are parsed whole.
+The built-in Markdown support in Zed handles markdown files. After you install this extension, code-block injection highlights every ` ```sudo ` and ` ```SudoLang ` fence. The `sudolang-lsp` server attaches to markdown buffers to diagnose, format, and navigate the fences in place. It never touches prose.
+
+A pure `.sudo` file registers as SudoLang, and the parser reads it as one unit.
 
 ## Install
 
@@ -20,11 +22,11 @@ Pure `.sudo` files register as SudoLang and are parsed whole.
 2. Run **`zed: extensions`**.
 3. Search for **SudoLang** and click **Install**.
 
-That's it — open any `.sudo` file to see highlighting, outline, and bracket matching.
+Now open any `.sudo` file to see highlighting, outline, and bracket matching.
 
 ### Dev install (for contributors)
 
-To work against a local checkout of this repo:
+To work against a local checkout of this repository:
 
 1. Clone this repository.
 2. In Zed, open the command palette and run **`zed: install dev extension`**.
@@ -35,31 +37,24 @@ Zed builds the parser from the SHA pinned in `extension.toml` and installs the e
 ## Features
 
 - SudoLang **v2.2**: qualified capability names (`mcp::linear`), named arguments, guard statements (`->`), decorators (`@retry(3)`), optional chaining `?.`, nullish default `??`, spread `...`, and the pipe placeholder `_`.
-- Syntax highlighting for interfaces, functions, constraints, commands, pipes, modifiers, strings, and section headings — plus capability namespaces and decorators.
-- Outline panel populated with interfaces, functions, constraints, commands, and `# heading` markers.
+- Syntax highlighting for interfaces, functions, constraints, commands, pipes, modifiers, strings, section headings, capability namespaces, and decorators.
+- An outline panel with interfaces, functions, constraints, commands, and `# heading` markers.
 - Bracket pair matching for `{}`, `[]`, `()`, `""`, and `` `` ``.
 - Indent-on-newline after `{` and `[`.
-- Vim-mode text objects for function / class / parameter / comment scopes.
-- **Diagnostics, formatting, hover, completion, and goto-definition via
-  `sudolang-lsp`** (opt-in — see below).
+- Vim-mode text objects for function, class, parameter, and comment scopes.
+- **Diagnostics, formatting, hover, completion, and go-to-definition through `sudolang-lsp`**. This part is opt-in. See below.
 
 ## Language server
 
-The extension registers a language server named **SudoLang LSP** and
-launches it on demand. It does not bundle a binary; install
-[`sudolang-lsp`](https://github.com/dylan-gluck/sudolang-lsp) yourself
-and ensure it's on `$PATH`:
+The extension registers a language server named **SudoLang LSP** and starts it on demand. It does not bundle a binary. Install [`sudolang-lsp`](https://github.com/dylan-gluck/sudolang-lsp) yourself and put it on `$PATH`:
 
 ```sh
 cargo install sudolang-lsp
 ```
 
-(or download a prebuilt binary from the
-[sudolang-lsp releases](https://github.com/dylan-gluck/sudolang-lsp/releases)
-and put it on `$PATH`).
+You can also download a prebuilt binary from the [sudolang-lsp releases](https://github.com/dylan-gluck/sudolang-lsp/releases) and put it on `$PATH`.
 
-Once installed, Zed picks it up automatically when you open a `.sudo`
-file or a markdown file with `sudo` fences. Enable format-on-save in your Zed settings to use the formatter:
+After the install, Zed starts the server when you open a `.sudo` file or a markdown file with `sudo` fences. To use the formatter, turn on format-on-save in your Zed settings:
 
 ```json
 {
@@ -71,26 +66,15 @@ file or a markdown file with `sudo` fences. Enable format-on-save in your Zed se
 }
 ```
 
-The server provides:
+The server gives you:
 
-- **Diagnostics** — unbalanced braces, missing tokens, malformed
-  modifier lists (`:foo=bar;`), broken `${}` interpolations, and a
-  pipe-placeholder (`_`) misuse lint.
-- **Formatting** — deterministic, AST-driven re-indent. Never reorders
-  tokens or rewrites content; never touches the inside of multi-line
-  strings or comments.
-- **Hover** — Markdown blurbs for keywords, decorators, capability
-  namespaces, in-document identifiers (function / interface / property /
-  variable / parameter / constraint), and `/command` invocations.
-- **Completion** — keywords, every named declaration in the current
-  document, and capability namespaces (`mcp::linear`). Trigger
-  characters: `.`, `/`, `$`, `:`, `@`.
-- **Go to definition** — jumps from an identifier or `/command`
-  invocation to its declaration in the same file.
+- **Diagnostics**: unbalanced braces, missing tokens, malformed modifier lists (`:foo=bar;`), broken `${}` interpolations, and a pipe-placeholder (`_`) misuse lint.
+- **Formatting**: a deterministic re-indent driven by the AST. It never reorders tokens or rewrites content. It never touches the inside of a multi-line string or comment.
+- **Hover**: Markdown blurbs for keywords, decorators, capability namespaces, in-document identifiers (function, interface, property, variable, parameter, and constraint), and `/command` invocations.
+- **Completion**: keywords, every named declaration in the current document, and capability namespaces (`mcp::linear`). The trigger characters are `.`, `/`, `$`, `:`, and `@`.
+- **Go to definition**: jumps from an identifier or a `/command` invocation to its declaration in the same file.
 
-If `sudolang-lsp` isn't on `$PATH` the extension fails the language-server
-launch with an actionable error pointing here. The rest of the extension
-(highlighting, outline, brackets) keeps working.
+If `sudolang-lsp` is not on `$PATH`, the language-server launch fails with an error that points here. The rest of the extension keeps working, which covers highlighting, outline, and brackets.
 
 ## License
 
