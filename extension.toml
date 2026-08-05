@@ -1,7 +1,7 @@
 id = "sudolang"
 name = "SudoLang"
 description = "SudoLang v2.2 language support: syntax highlighting, outline, brackets, sudo code-fence support in markdown, and the sudolang-lsp language server (diagnostics + formatting + hover + completion)."
-version = "0.3.2"
+version = "0.3.3"
 schema_version = 1
 authors = ["Dylan Navajas Gluck"]
 repository = "https://github.com/dylan-gluck/zed-sudolang"
@@ -15,7 +15,7 @@ kind = "Rust"
 
 [grammars.sudolang]
 repository = "https://github.com/dylan-gluck/tree-sitter-sudolang"
-rev = "554eeb82228d8bce09d5b2989689e8bb09200cd2"
+rev = "961712758ea61e13010556646a3df501dac00c81"
 
 [language_servers.sudolang-lsp]
 name = "SudoLang LSP"
